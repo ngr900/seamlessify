@@ -102,10 +102,20 @@ function funnyUid ( ) {
 function downloadImage ( data ) {
 
   const fileName = `Seamlessify_${funnyUid()}.png`;
-  const link = document.createElement ( 'a' );
-  link.setAttribute("href", data);
-  link.setAttribute("download", fileName);
-  link.click();
+
+  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if ( iOS ) {
+    window.location = data;
+    document.title = fileName;
+  } else {
+    const link = document.createElement ( 'a' );
+    console.log(data);
+    link.setAttribute("href", data);
+    link.setAttribute("download", fileName );
+    link.click();
+  }
+
 
 }
 
